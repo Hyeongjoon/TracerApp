@@ -44,8 +44,8 @@ public class SocketListener_signUp {
                                 @Override
                                 public void run() {
                                     createDialog(activity , result , tmp);
-                                    pDialog.cancel();
                                     dialog.show();
+                                    pDialog.cancel();
                                 }
                             });
                         }

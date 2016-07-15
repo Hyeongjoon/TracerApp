@@ -39,8 +39,9 @@ public class SocketListener_login {
                                 @Override
                                 public void run() {
                                     // 알림창 띄우기
-                                    pDialog.cancel();
+
                                     dialog.show();
+                                    pDialog.cancel();
                                 }
                             });
                         }
