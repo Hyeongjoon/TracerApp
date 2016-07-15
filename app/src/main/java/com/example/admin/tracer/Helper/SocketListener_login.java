@@ -41,7 +41,6 @@ public class SocketListener_login {
                                     // 알림창 띄우기
                                     pDialog.cancel();
                                     dialog.show();
-                                    return;
                                 }
                             });
                         }
@@ -50,7 +49,6 @@ public class SocketListener_login {
                 }
             } catch (JSONException e){
                 System.out.println(e);
-                return;
             }
         }
     };

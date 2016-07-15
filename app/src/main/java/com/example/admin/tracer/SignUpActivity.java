@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.admin.tracer.Helper.SocketIO;
+import com.example.admin.tracer.Helper.SocketListener_login;
 import com.example.admin.tracer.Helper.SocketListener_signUp;
 
 import org.json.JSONException;
@@ -19,9 +20,10 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        socketListener =new SocketListener_signUp();
         setContentView(R.layout.activity_sign_up);
-
+        socketListener.setActivity(this);
+        SocketIO.getSocket().on("signUp_result" , socketListener.getListner());
     }
 
     public void signUp_buttonClick(View v){
@@ -60,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
                         System.out.println(e);
                     }
                     pDialog= ProgressDialog.show(this, "signUp.....", "Please wait", true, true);
-
+                    socketListener.setpDialog(pDialog);
                     SocketIO.getSocket().emit("signUp", inform);
                     return;
                 }
