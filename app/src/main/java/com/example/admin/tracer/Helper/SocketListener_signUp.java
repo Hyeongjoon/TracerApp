@@ -5,8 +5,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
 
+
+import com.example.admin.tracer.EmailVerifyActivity;
+import com.example.admin.tracer.R;
 import com.github.nkzawa.emitter.Emitter;
 
 import org.json.JSONException;
@@ -22,7 +28,6 @@ public class SocketListener_signUp {
     private Dialog dialog;
     private Handler mHandler = new Handler();
     private Activity activity = null;
-    private String tmp;
 
                         private Emitter.Listener resultSignUp = new Emitter.Listener() {
                             @Override
@@ -32,25 +37,30 @@ public class SocketListener_signUp {
                                     result = data.getString("result");
                                     if(result.equals("true")){
                                         pDialog.cancel();
-                                        tmp = "회원가입 성공";
-                                        result = "회원가입에 성공하셨습니다. 로그인을 해주세요";
+                                        Intent intent = new Intent(
+                                                activity.getApplicationContext() , // 현재 화면의 제어권자
+                                                EmailVerifyActivity.class);
+                                        EditText emailText = (EditText)activity.findViewById(R.id.signUp_email);
+                                        String email = emailText.getText().toString().trim();
+                                        intent.putExtra("email" , email);
+                                        activity.startActivity(intent);
+                                        activity.finish();
                                     } else {
-                                        tmp = "회원가입 오류";
+                                        Thread t = new Thread(new Runnable(){
+                                            @Override
+                                            public void run() {
+                                                mHandler.post(new Runnable(){
+                                                    @Override
+                                                    public void run() {
+                                                        createDialog(activity , result);
+                                                        dialog.show();
+                                                        pDialog.cancel();
+                                                    }
+                                                });
+                                            }
+                                        });
+                                        t.start();
                                     }
-                        Thread t = new Thread(new Runnable(){
-                        @Override
-                        public void run() {
-                            mHandler.post(new Runnable(){
-                                @Override
-                                public void run() {
-                                    createDialog(activity , result , tmp);
-                                    dialog.show();
-                                    pDialog.cancel();
-                                }
-                            });
-                        }
-                    });
-                    t.start();
             } catch (JSONException e){
                 System.out.println(e);
                 return;
@@ -69,12 +79,13 @@ public class SocketListener_signUp {
 
     public void setActivity (Activity a){
         this.activity = a;
+        System.out.println("여기가 그거임 로그ㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅ");
         return;
     }
-    private void createDialog(Activity a , String result , String tmp){
+    private void createDialog(Activity a , String result ){
         AlertDialog.Builder builder = new AlertDialog.Builder(a);     // 여기서 this는 Activity의 this
         // 여기서 부터는 알림창의 속성 설정
-        builder.setTitle(tmp)        // 제목 설정
+        builder.setTitle("회원가입 오류")        // 제목 설정
                 .setMessage(result)        // 메세지 설정
                 .setCancelable(true)        // 뒤로 버튼 클릭시 취소 가능 설정
                 .setPositiveButton("확인", new DialogInterface.OnClickListener(){

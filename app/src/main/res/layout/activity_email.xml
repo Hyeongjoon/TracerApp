@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.admin.tracer.OpeningActivity"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/concept0_image">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--도입 문구 장행준 코쟁이-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인증메일을 발송하였습니다.\n\n이메일 접속 후 인증해주세요"
+                android:textSize="27dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:textColor="@color/txt"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:transitionGroup="true">
+            <Button
+                android:id="@+id/verify_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="로그인 하러가기"
+                android:onClick="verifyEmail_Onclick"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="20dp"
+                android:padding="10dp"
+                android:background="@drawable/selector_btn_clicker_white" />
+            <Button
+                android:id="@+id/verify_Reemail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="인증메일 재발송"
+                android:textColor="@color/txt"
+                android:onClick="verifyEmail_Onclick"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="20dp"
+                android:padding="10dp"
+                android:background="@drawable/selector_btn_clicker_dark2"
+                android:layout_below="@id/verify_login"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="30dp">
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+

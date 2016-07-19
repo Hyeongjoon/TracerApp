@@ -17,13 +17,19 @@ import org.json.JSONObject;
 public class SignUpActivity extends AppCompatActivity {
     SocketListener_signUp socketListener = null;
     ProgressDialog pDialog = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         socketListener =new SocketListener_signUp();
         setContentView(R.layout.activity_sign_up);
-        socketListener.setActivity(this);
+    }
+
+    @Override
+    protected void onStart(){
         SocketIO.getSocket().on("signUp_result" , socketListener.getListner());
+        socketListener.setActivity(this);
+        super.onStart();
     }
 
     public void signUp_buttonClick(View v){
@@ -68,5 +74,11 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 }
         }
+    }
+
+    @Override
+    protected void onDestroy(){
+        SocketIO.getSocket().off("signUp_result" , socketListener.getListner());
+        super.onDestroy();
     }
 }

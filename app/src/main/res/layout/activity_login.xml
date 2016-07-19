@@ -1,77 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.admin.tracer.LoginActivity"
-    android:orientation="vertical"
-    >
+  <ScrollView
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.example.admin.tracer.LoginActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/concept0_image">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추억의\n발자취를\n남겨보세요"
+            android:textSize="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/txt" />
+    </RelativeLayout>
+                                              <!--id/pw/login 입력 부분-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <EditText
+            android:id = "@+id/login_email"
+            android:hint="이메일"
+            android:maxLength="30"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:background="@drawable/selector_btn_clicker_dark"/>
 
-    <!--도입 문구 장행준 코쟁이-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="추억의\n발자취를\n남겨보세요"
-        android:textSize="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"/>
-    <!--id/pw 입력 부분-->
-    <EditText
-        android:id = "@+id/login_email"
-        android:hint="이메일"
-        android:maxLength="30"
-        android:inputType="textEmailAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id = "@+id/login_password"
-        android:hint="비밀번호"
-        android:maxLength="20"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id = "@+id/login_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="로그인"
-        android:onClick="Login_ButtonClick"
-        />
-    <!-- 계정을 잊으셨나요-->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="계정을 잊으셨나요?"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:autoLink="none"
-        />
-    <!-- 또는 -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-------------------또는-------------------"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        />
-    <!-- 연동하기-->
-    <Button
-        android:id = "@+id/login_facebook_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="페이스북"/>
-        <!--android:drawableLeft="@drawable/"-->
+        <EditText
+            android:id = "@+id/login_password"
+            android:hint="비밀번호"
+            android:maxLength="20"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:background="@drawable/selector_btn_clicker_dark"
+            android:layout_below="@id/login_email"/>
 
-    <Button
-        android:id = "@+id/login_kakao_login"
+        <Button
+            android:id = "@+id/login_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="로그인"
+            android:onClick="Login_ButtonClick"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:background="@drawable/selector_btn_clicker_white"
+            android:layout_below="@id/login_password"/>
+    </RelativeLayout>
+                                        <!--계정을 잊으셨나요-->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="카카오톡"/>
-        <!--android:drawableLeft="@drawable/"-->
-</LinearLayout>
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호를 잊으셨나요?"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:autoLink="none" />
+    </RelativeLayout>
+                                                <!-- 또는 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp">
+        <TextView
+            android:id="@+id/login_or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="---------------------또는---------------------"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/login_facebook_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="페이스북으로 로그인하기"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:background="@drawable/selector_btn_clicker_white"
+            android:layout_below="@id/login_or"/>
+
+        <Button
+            android:id = "@+id/login_kakao_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="카카오톡으로 로그인하기"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:background="@drawable/selector_btn_clicker_white"
+            android:layout_below="@id/login_facebook_login"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ⓒsendwitch company.2016"
+            android:layout_margin="10dp"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+   </LinearLayout>
+  </ScrollView>
+
 

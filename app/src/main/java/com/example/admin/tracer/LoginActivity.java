@@ -13,18 +13,25 @@ import com.example.admin.tracer.Helper.SocketListener_login;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+
 public class LoginActivity extends AppCompatActivity {
     SocketListener_login socketListener = null;
     ProgressDialog pDialog = null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         socketListener =new SocketListener_login();
         setContentView(R.layout.activity_login);
-        socketListener.setDialogActivity(this);
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
         SocketIO.getSocket().on("login_result" , socketListener.getListner());
+        socketListener.setDialogActivity(this);
     }
 
     public void Login_ButtonClick(View v) {
@@ -49,13 +56,20 @@ public class LoginActivity extends AppCompatActivity {
                     } catch (JSONException e){
                         System.out.println(e);
                     }
-                    pDialog=ProgressDialog.show(this, "Login.....", "Please wait", true, true);
-                    socketListener.setpDialog(pDialog);
+                    pDialog = ProgressDialog.show(this, "login.....", "Please wait", true, true);
+                    socketListener.setPDialog(pDialog);
                     SocketIO.getSocket().emit("login", inform);
                     return;
                 }
             }
         }
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        SocketIO.getSocket().off("login_result" , socketListener.getListner());
+    }
+
 }
 

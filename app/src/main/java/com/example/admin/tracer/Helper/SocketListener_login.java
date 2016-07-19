@@ -5,8 +5,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
+import android.os.SystemClock;
 
+import com.example.admin.tracer.EmailVerifyActivity;
+import com.example.admin.tracer.LoginActivity;
 import com.github.nkzawa.emitter.Emitter;
 
 import org.json.JSONException;
@@ -21,6 +25,7 @@ public class SocketListener_login {
     private ProgressDialog pDialog;
     private Dialog dialog;
     private Handler mHandler = new Handler();
+    private LoginActivity loginActivity;
 
     private Emitter.Listener resultLogin = new Emitter.Listener() {
         @Override
@@ -31,7 +36,15 @@ public class SocketListener_login {
                 if(result.equals("true")){
                     pDialog.cancel();
                     //로그인 성공했을때 코드적으면 될듯
-                } else{
+                } else if(result.equals("verify")){
+                    pDialog.cancel();
+                    String email = data.getString("email");
+                    Intent intent = new Intent(loginActivity , EmailVerifyActivity.class);
+                    intent.putExtra("email" , email);
+                    loginActivity.startActivity(intent);
+                    loginActivity.finish();
+                    return;
+                }else{
                     Thread t = new Thread(new Runnable(){
                         @Override
                         public void run() {
@@ -39,7 +52,7 @@ public class SocketListener_login {
                                 @Override
                                 public void run() {
                                     // 알림창 띄우기
-
+                                    createDialog(loginActivity);
                                     dialog.show();
                                     pDialog.cancel();
                                 }
@@ -53,20 +66,16 @@ public class SocketListener_login {
             }
         }
     };
-    public Emitter.Listener getListner(){
-        return resultLogin;
-    }
 
-    public void setpDialog(ProgressDialog pDialog){
-        this.pDialog = pDialog;
-        return;
+    public void setPDialog(ProgressDialog p){
+        pDialog = p;
     }
-
 
     public void setDialogActivity (Activity a){
-        createDialog(a);
+        this.loginActivity = (LoginActivity)a;
         return;
     }
+
     private void createDialog(Activity a){
         AlertDialog.Builder builder = new AlertDialog.Builder(a);     // 여기서 this는 Activity의 this
         // 여기서 부터는 알림창의 속성 설정
@@ -79,8 +88,10 @@ public class SocketListener_login {
                         dialog.cancel();
                     }
                 });
-        dialog = builder.create();    // 알림창 객체 생성
+        dialog = builder.create();
         // 알림창 띄우기
     }
-
+    public Emitter.Listener getListner(){
+        return resultLogin;
+    }
 }
