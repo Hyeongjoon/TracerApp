@@ -11,6 +11,8 @@ import android.os.SystemClock;
 
 import com.example.admin.tracer.EmailVerifyActivity;
 import com.example.admin.tracer.LoginActivity;
+import com.example.admin.tracer.MainActivity;
+import com.example.admin.tracer.OpeningActivity;
 import com.github.nkzawa.emitter.Emitter;
 
 import org.json.JSONException;
@@ -25,7 +27,7 @@ public class SocketListener_login {
     private ProgressDialog pDialog;
     private Dialog dialog;
     private Handler mHandler = new Handler();
-    private LoginActivity loginActivity;
+    private Activity loginActivity;
 
     private Emitter.Listener resultLogin = new Emitter.Listener() {
         @Override
@@ -35,7 +37,11 @@ public class SocketListener_login {
                 result = data.getString("result");
                 if(result.equals("true")){
                     pDialog.cancel();
-                    //로그인 성공했을때 코드적으면 될듯
+                    Intent intent = new Intent(loginActivity , MainActivity.class);
+                    loginActivity.startActivity(intent);
+                    loginActivity.finish();
+                    OpeningActivity.OpeningActivity.finish();
+                    return;
                 } else if(result.equals("verify")){
                     pDialog.cancel();
                     String email = data.getString("email");
@@ -72,7 +78,7 @@ public class SocketListener_login {
     }
 
     public void setDialogActivity (Activity a){
-        this.loginActivity = (LoginActivity)a;
+        this.loginActivity = a;
         return;
     }
 
@@ -91,7 +97,7 @@ public class SocketListener_login {
         dialog = builder.create();
         // 알림창 띄우기
     }
-    public Emitter.Listener getListner(){
+    public Emitter.Listener getListener(){
         return resultLogin;
     }
 }

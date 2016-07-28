@@ -27,7 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onStart(){
-        SocketIO.getSocket().on("signUp_result" , socketListener.getListner());
+        SocketIO.getSocket().on("signUp_result" , socketListener.getListener());
         socketListener.setActivity(this);
         super.onStart();
     }
@@ -78,7 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy(){
-        SocketIO.getSocket().off("signUp_result" , socketListener.getListner());
+        SocketIO.getSocket().off("signUp_result" , socketListener.getListener());
         super.onDestroy();
     }
 }

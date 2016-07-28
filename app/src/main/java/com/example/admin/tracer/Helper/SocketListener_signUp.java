@@ -67,7 +67,7 @@ public class SocketListener_signUp {
             }
         }
     };
-    public Emitter.Listener getListner(){
+    public Emitter.Listener getListener(){
         return resultSignUp;
     }
 
@@ -79,7 +79,6 @@ public class SocketListener_signUp {
 
     public void setActivity (Activity a){
         this.activity = a;
-        System.out.println("여기가 그거임 로그ㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅㅅ");
         return;
     }
     private void createDialog(Activity a , String result ){
@@ -97,6 +96,4 @@ public class SocketListener_signUp {
         dialog = builder.create();    // 알림창 객체 생성
         // 알림창 띄우기
     }
-
-
 }

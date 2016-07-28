@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        SocketIO.getSocket().on("login_result" , socketListener.getListner());
+        SocketIO.getSocket().on("login_result" , socketListener.getListener());
         socketListener.setDialogActivity(this);
     }
 
@@ -67,9 +67,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy(){
+        SocketIO.getSocket().off("login_result" , socketListener.getListener());
         super.onDestroy();
-        SocketIO.getSocket().off("login_result" , socketListener.getListner());
-    }
 
+    }
 }
 
