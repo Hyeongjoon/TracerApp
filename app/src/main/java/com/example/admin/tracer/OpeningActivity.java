@@ -3,19 +3,12 @@ package com.example.admin.tracer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
-import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+
 
 /**
  * Created by admin on 2016-07-15.
@@ -25,8 +18,6 @@ public class OpeningActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         OpeningActivity = this;
         super.onCreate(savedInstanceState);
         boolean isRunIntro = getIntent().getBooleanExtra("intro", true);
@@ -35,20 +26,9 @@ public class OpeningActivity extends AppCompatActivity {
         } else {
             afterIntro(savedInstanceState);
         }
-        this.initImageLoader(getApplicationContext());
     }
 
-    private void initImageLoader(Context context)
-    {
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-                .threadPriority(Thread.NORM_PRIORITY - 2)
-                .denyCacheImageMultipleSizesInMemory()
-                .discCacheFileNameGenerator(new Md5FileNameGenerator())
-                .tasksProcessingOrder(QueueProcessingType.LIFO)
-                .writeDebugLogs() // 마켓에 포팅하실땐 빼주세요.
-                .build();
-        ImageLoader.getInstance().init(config);
-    }
+
 
     private void beforeIntro() {
         // 약 2초간 인트로 화면을 출력.
