@@ -7,13 +7,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.example.admin.tracer.Helper.SocketIO;
-import com.example.admin.tracer.Helper.SocketListener_main_sub1;
+import com.example.admin.tracer.Listener.SocketListener_main_sub1;
 
 /* 수정된 Main Activity */
 public class MainActivity extends FragmentActivity implements OnClickListener {

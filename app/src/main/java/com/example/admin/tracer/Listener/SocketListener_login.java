@@ -1,4 +1,4 @@
-package com.example.admin.tracer.Helper;
+package com.example.admin.tracer.Listener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,10 +7,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
-import android.os.SystemClock;
 
 import com.example.admin.tracer.EmailVerifyActivity;
-import com.example.admin.tracer.LoginActivity;
 import com.example.admin.tracer.MainActivity;
 import com.example.admin.tracer.OpeningActivity;
 import com.github.nkzawa.emitter.Emitter;

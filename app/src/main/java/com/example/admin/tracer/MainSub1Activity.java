@@ -1,11 +1,8 @@
 package com.example.admin.tracer;
 
-import android.app.ActionBar;
-import android.app.Activity;
+
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,25 +10,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.BitmapTypeRequest;
-import com.bumptech.glide.DrawableTypeRequest;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.GlideBuilder;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.FutureTarget;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.target.ViewTarget;
-import com.example.admin.tracer.Helper.SocketIO;
-import com.example.admin.tracer.Helper.SocketListener_main_sub1;
+import com.example.admin.tracer.Listener.SocketIO;
+import com.example.admin.tracer.Listener.SocketListener_main_sub1;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
 
 
 public class MainSub1Activity extends Fragment {
@@ -57,7 +43,7 @@ public class MainSub1Activity extends Fragment {
 		socketListener.setActivity(getActivity());
 		SocketIO.getSocket().on( "GroupImageResult", socketListener.getListener());
 		SocketIO.getSocket().emit("getGroupImage" , true);
-		final RelativeLayout layout = (RelativeLayout)inflater.inflate(R.layout.activity_main_sub1, container, false);
+		final LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.activity_main_sub1, container, false);
 		Button testBtn = (Button) layout.findViewById(R.id.testBtn);
 		testBtn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -90,12 +76,12 @@ public class MainSub1Activity extends Fragment {
 
 	public void onDestroyView(){
 		Log.d("msg" , "onDestroy");
+		SocketIO.getSocket().off( "GroupImageResult", socketListener.getListener());
 		super.onDestroyView();
 	}
 
 	@Override
 	public void onDestroy(){
-		SocketIO.getSocket().off( "GroupImageResult", socketListener.getListener());
 		super.onDestroy();
 	}
 }
