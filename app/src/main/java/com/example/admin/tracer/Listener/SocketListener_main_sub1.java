@@ -28,8 +28,6 @@ public class SocketListener_main_sub1 {
 
     Main_sub1_grid_adapter adapter;
     Activity a;
-    int groupNum;
-    Bitmap b;
 
     private Handler mHandler = new Handler();
 
@@ -43,7 +41,8 @@ public class SocketListener_main_sub1 {
         public void call(Object... args) {
             final JSONArray url = (JSONArray) args[0];
             final JSONArray group = (JSONArray) args[1];
-            JSONObject groupNumJSON = (JSONObject)args[2];
+            final JSONObject groupNumJSON = (JSONObject)args[2];
+            final JSONArray groupInfo = (JSONArray)args[3]; // 예외처리할것
             try{
                 Thread t = new Thread(new Runnable(){
                     @Override
@@ -53,15 +52,8 @@ public class SocketListener_main_sub1 {
                             public void run() {
                                 GridView gridView_group = (GridView)a.findViewById(R.id.main_sub1_group_grid);
                                 gridView_group.setNumColumns(2);
-                                adapter.setGroup(group , url);
+                                adapter.setGroup(group , url , groupNumJSON , groupInfo);
                                 gridView_group.setAdapter(adapter);
-
-                                /*Glide.with(a).load(result).asBitmap().into(new SimpleTarget<Bitmap>() {
-                                    @Override
-                                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-
-                                    }
-                                });*/
                             }
                         });
                     }
