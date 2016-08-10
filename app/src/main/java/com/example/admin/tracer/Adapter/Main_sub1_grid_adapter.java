@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.bumptech.glide.Glide;
 import com.example.admin.tracer.R;
@@ -83,7 +85,7 @@ public class Main_sub1_grid_adapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         int[] tempUID = new int[4];
         if (convertView==null)
             convertView = inf.inflate(layout, null);
@@ -97,6 +99,12 @@ public class Main_sub1_grid_adapter extends BaseAdapter{
                 }
             }
             GridLayout item_layout = (GridLayout)convertView.findViewById(R.id.main_sub1_item);
+           // TextView textView1 = (TextView)convertView.findViewById(R.id.main_sub1_textView1);
+            TextView textView2 = (TextView)convertView.findViewById(R.id.main_sub1_textView2);
+            JSONObject target = (JSONObject)getItem(position);
+           // textView1.setText(target.getString("number"));
+            textView2.setText(target.getString("name"));      //이름설정부분
+
             ImageView[] IvArr = new ImageView[4];
             switch (count) {
                 case 1 : {
@@ -125,12 +133,14 @@ public class Main_sub1_grid_adapter extends BaseAdapter{
                     break;
                 }
             };
-
-
-            String tempURL;
-            tempURL = jsonArrayProfileURL.getJSONObject(0).getString("profile");
-            Glide.with(mContext).load(tempURL).into(IvArr[0]);
-
+            for (int i = 0 ; i < count ; i++ ) {
+                for (int j = 0 ; j < jsonArrayProfileURL.length(); j++) {
+                    if (tempUID[i] ==jsonArrayProfileURL.getJSONObject(j).getInt("uid")) {
+                        String tempURL = jsonArrayProfileURL.getJSONObject(j).getString("profile");
+                        Glide.with(mContext).load(tempURL).into(IvArr[i]);
+                    }
+                }
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -139,7 +149,7 @@ public class Main_sub1_grid_adapter extends BaseAdapter{
         return convertView;
     }
 
-    public void setGroup(JSONArray jsonArrayGroup , JSONArray jsonArrayProfileURL , JSONObject groupNum, JSONArray groupInfo){
+    public void setGroup(JSONArray jsonArrayGroup , JSONArray jsonArrayProfileURL , JSONObject groupNum, JSONArray groupInfo) {
         this.jsonArrayGroup = jsonArrayGroup;
         this.jsonArrayProfileURL = jsonArrayProfileURL;
         this.groupNum = groupNum;

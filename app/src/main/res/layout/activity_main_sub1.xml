@@ -1,72 +1,75 @@
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/activity_main_sub1"
+    >
 
-
-    <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/activity_main_sub1"
-        >
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:fadingEdge="none">
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/main_sub1_linear"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fillViewport="true"
-            android:fadingEdge="none">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/main_sub1_linear"
+            <ImageView
+                android:id="@+id/favorite_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:src="@drawable/favorite"
+                />
 
-                <ImageView
-                    android:id="@+id/favorite_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/favorite"
-                    />
-
-                <GridView
-                    android:id="@+id/favorite"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:useDefaultMargins="true"
-                    android:columnOrderPreserved="true"
-                    android:stretchMode="columnWidth"
-                    android:numColumns="auto_fit">
-                    </GridView>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/favorite"/>
-
-                <GridView
-                    android:id="@+id/main_sub1_group_grid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:stretchMode="columnWidth"
-                    android:numColumns="auto_fit"
-                    >
-                </GridView>
-            </LinearLayout>
-
-        </ScrollView>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/testBtn"
-                android:layout_width="wrap_content"
+            <GridView
+                android:id="@+id/favorite"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"/>
-        </RelativeLayout>
+                android:orientation="horizontal"
+                android:useDefaultMargins="true"
+                android:columnOrderPreserved="true"
+                android:stretchMode="spacingWidth"
+                android:numColumns="auto_fit"
+                android:columnWidth="180dp">
+            </GridView>
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/favorite"/>
+
+            <GridView
+                android:id="@+id/main_sub1_group_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:useDefaultMargins="true"
+                android:columnOrderPreserved="true"
+                android:stretchMode="spacingWidth"
+                android:numColumns="auto_fit"
+                android:columnWidth="180dp"
+                >
+            </GridView>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/testBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

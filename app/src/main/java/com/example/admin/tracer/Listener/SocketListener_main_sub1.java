@@ -3,9 +3,13 @@ package com.example.admin.tracer.Listener;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
@@ -44,16 +48,22 @@ public class SocketListener_main_sub1 {
             final JSONObject groupNumJSON = (JSONObject)args[2];
             final JSONArray groupInfo = (JSONArray)args[3]; // 예외처리할것
             try{
-                Thread t = new Thread(new Runnable(){
+                Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        mHandler.post(new Runnable(){
+                        mHandler.post( new Runnable() {
                             @Override
                             public void run() {
                                 GridView gridView_group = (GridView)a.findViewById(R.id.main_sub1_group_grid);
-                                gridView_group.setNumColumns(2);
                                 adapter.setGroup(group , url , groupNumJSON , groupInfo);
                                 gridView_group.setAdapter(adapter);
+                                gridView_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        Log.d("msg" , ""+id);
+                                        //여기에 인텐트 넘어가는거 넣으면 될듯
+                                    }
+                                });
                             }
                         });
                     }
