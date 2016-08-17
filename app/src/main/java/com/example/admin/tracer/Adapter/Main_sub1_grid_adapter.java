@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.Image;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,31 +100,54 @@ public class Main_sub1_grid_adapter extends BaseAdapter{
                 }
             }
             GridLayout item_layout = (GridLayout)convertView.findViewById(R.id.main_sub1_item);
-           // TextView textView1 = (TextView)convertView.findViewById(R.id.main_sub1_textView1);
-            TextView textView2 = (TextView)convertView.findViewById(R.id.main_sub1_textView2);
+            TextView groupNum = (TextView)convertView.findViewById(R.id.main_sub1_group_num);
+            TextView groupName = (TextView)convertView.findViewById(R.id.main_sub1_group_name);
             JSONObject target = (JSONObject)getItem(position);
-           // textView1.setText(target.getString("number"));
-            textView2.setText(target.getString("name"));      //이름설정부분
+            groupNum.setText(target.getString("number"));
+            groupName.setText(target.getString("name"));      //이름설정부분
 
             ImageView[] IvArr = new ImageView[4];
             switch (count) {
                 case 1 : {
+                    int value = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 180,  mContext.getResources().getDisplayMetrics());
                     item_layout.removeViewInLayout((ImageView)convertView.findViewById(R.id.main_sub1_imageView4));
                     item_layout.removeViewInLayout((ImageView)convertView.findViewById(R.id.main_sub1_imageView3));
                     item_layout.removeViewInLayout((ImageView)convertView.findViewById(R.id.main_sub1_imageView2));
-                    IvArr[0] = (ImageView)convertView.findViewById(R.id.main_sub1_imageView1);
+
+                    ImageView imageView1 = (ImageView)convertView.findViewById(R.id.main_sub1_imageView1);
+                    ViewGroup.LayoutParams itemLayoutParams1 = imageView1.getLayoutParams();
+                    itemLayoutParams1.height = value;
+                    itemLayoutParams1.width = value;
+                    imageView1.setLayoutParams(itemLayoutParams1);
+                    IvArr[0] = imageView1;
                     break;
                 } case 2 : {
+                    int value = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 180,  mContext.getResources().getDisplayMetrics());
                     item_layout.removeViewInLayout((ImageView)convertView.findViewById(R.id.main_sub1_imageView4));
                     item_layout.removeViewInLayout((ImageView)convertView.findViewById(R.id.main_sub1_imageView3));
-                    IvArr[0] = (ImageView)convertView.findViewById(R.id.main_sub1_imageView1);
-                    IvArr[1] = (ImageView)convertView.findViewById(R.id.main_sub1_imageView2);
+                    ImageView imageView1 = (ImageView)convertView.findViewById(R.id.main_sub1_imageView1);
+                    ImageView imageView2 = (ImageView)convertView.findViewById(R.id.main_sub1_imageView2);
+                    ViewGroup.LayoutParams itemLayoutParams1 = imageView1.getLayoutParams();
+                    ViewGroup.LayoutParams itemLayoutParams2 = imageView2.getLayoutParams();
+                    itemLayoutParams1.height = value;
+                    itemLayoutParams2.height = value;
+                    imageView1.setLayoutParams(itemLayoutParams1);
+                    imageView2.setLayoutParams(itemLayoutParams2);
+                    IvArr[0] = imageView1;
+                    IvArr[1] = imageView2;
                     break;
                 } case 3 : {
-                    item_layout.removeViewInLayout((ImageView)convertView.findViewById(R.id.main_sub1_imageView4));
-                    IvArr[0] = (ImageView)convertView.findViewById(R.id.main_sub1_imageView1);
-                    IvArr[1] = (ImageView)convertView.findViewById(R.id.main_sub1_imageView2);
-                    IvArr[2] = (ImageView)convertView.findViewById(R.id.main_sub1_imageView3);
+
+                    ImageView imageView1 = (ImageView)convertView.findViewById(R.id.main_sub1_imageView1);
+                    //ViewGroup.LayoutParams itemLayoutParams1 = imageView1.getLayoutParams();
+                    GridLayout.LayoutParams itemLayoutParams = new GridLayout.LayoutParams(imageView1.getLayoutParams());
+                    itemLayoutParams.rowSpec = GridLayout.spec(1,2);
+                    itemLayoutParams.columnSpec = GridLayout.spec(0);
+                    imageView1.setLayoutParams(itemLayoutParams);
+                    item_layout.removeViewInLayout((ImageView)convertView.findViewById(R.id.main_sub1_imageView2));
+                    IvArr[0] = imageView1;
+                    IvArr[1] = (ImageView)convertView.findViewById(R.id.main_sub1_imageView3);
+                    IvArr[2] = (ImageView)convertView.findViewById(R.id.main_sub1_imageView4);
                     break;
                 } case 4 : {
                     IvArr[0] = (ImageView)convertView.findViewById(R.id.main_sub1_imageView1);

@@ -3,6 +3,7 @@ package com.example.admin.tracer;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,15 +44,7 @@ public class MainSub1Activity extends Fragment {
 		socketListener.setActivity(getActivity());
 		SocketIO.getSocket().on( "GroupImageResult", socketListener.getListener());
 		SocketIO.getSocket().emit("getGroupImage" , true);
-		final LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.activity_main_sub1, container, false);
-		Button testBtn = (Button) layout.findViewById(R.id.testBtn);
-		testBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getActivity(), "첫번째 페이지입니다.", Toast.LENGTH_SHORT).show();
-			}
-		});
+		final CoordinatorLayout layout = (CoordinatorLayout) inflater.inflate(R.layout.activity_main_sub1, container, false);
 		return layout;
 	}
 
@@ -73,7 +66,7 @@ public class MainSub1Activity extends Fragment {
 		super.onResume();
 	}
 
-
+	@Override
 	public void onDestroyView(){
 		Log.d("msg" , "onDestroy");
 		SocketIO.getSocket().off( "GroupImageResult", socketListener.getListener());

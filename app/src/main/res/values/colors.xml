@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="txt">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="btn_pressed_dark">#66000000</color>
     <color name="btn_non_pressed_dark">#33000000</color>
     <color name="btn_pressed_white">#33FFFFFF</color>
     <color name="btn_non_pressed_white">#99FFFFFF</color>
+    <color name="group_outline_gray">#E0E0E0</color>
+    <color name="group_nameline_redgray">#7F5E5E</color>
 
 </resources>
