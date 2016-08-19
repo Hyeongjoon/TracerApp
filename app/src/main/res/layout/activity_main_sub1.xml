@@ -12,14 +12,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:fillViewport="true"
-        android:fadingEdge="none">
-
         <LinearLayout
             android:id="@+id/main_sub1_linear"
             android:layout_width="match_parent"
@@ -64,7 +56,6 @@
             </GridView>
         </LinearLayout>
 
-    </ScrollView>
 
 </LinearLayout>
 <android.support.design.widget.FloatingActionButton

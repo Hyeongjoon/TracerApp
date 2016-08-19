@@ -1,21 +1,13 @@
 package com.example.admin.tracer.Listener;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 
-import com.bumptech.glide.Glide;
-
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.admin.tracer.Adapter.Main_sub1_grid_adapter;
 import com.example.admin.tracer.R;
 import com.github.nkzawa.emitter.Emitter;

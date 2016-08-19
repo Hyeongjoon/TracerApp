@@ -113,7 +113,6 @@ public class Main_sub1_grid_adapter extends BaseAdapter{
                     item_layout.removeViewInLayout((ImageView)convertView.findViewById(R.id.main_sub1_imageView4));
                     item_layout.removeViewInLayout((ImageView)convertView.findViewById(R.id.main_sub1_imageView3));
                     item_layout.removeViewInLayout((ImageView)convertView.findViewById(R.id.main_sub1_imageView2));
-
                     ImageView imageView1 = (ImageView)convertView.findViewById(R.id.main_sub1_imageView1);
                     ViewGroup.LayoutParams itemLayoutParams1 = imageView1.getLayoutParams();
                     itemLayoutParams1.height = value;
@@ -137,7 +136,6 @@ public class Main_sub1_grid_adapter extends BaseAdapter{
                     IvArr[1] = imageView2;
                     break;
                 } case 3 : {
-
                     ImageView imageView1 = (ImageView)convertView.findViewById(R.id.main_sub1_imageView1);
                     //ViewGroup.LayoutParams itemLayoutParams1 = imageView1.getLayoutParams();
                     GridLayout.LayoutParams itemLayoutParams = new GridLayout.LayoutParams(imageView1.getLayoutParams());
