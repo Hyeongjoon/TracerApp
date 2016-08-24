@@ -1,13 +1,11 @@
 package com.example.admin.tracer.Listener;
 
 import android.app.Activity;
+import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.ListView;
 
 import com.example.admin.tracer.Adapter.Main_sub2_grid_adapter;
-import com.example.admin.tracer.Helper.TimeConvert;
 import com.example.admin.tracer.R;
 import com.github.nkzawa.emitter.Emitter;
 
@@ -15,34 +13,40 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
-
 /**
  * Created by admin on 2016-08-10.
  */
 public class SocketListener_main_sub2 {
     Main_sub2_grid_adapter adapter;
     Activity a;
+    private Handler mHandler = new Handler();
 
     private Emitter.Listener mainSub2Listener = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-
-                JSONObject alram = (JSONObject)args[0];
-                adapter.setAlram(alram);
-                /*JSONArray location = alram.getJSONArray("location");
-                JSONArray like_location = alram.getJSONArray("like");
-                JSONArray dislike_location = alram.getJSONArray("dislike");
-                JSONArray reply = alram.getJSONArray("reply");
-                JSONArray re_reply = alram.getJSONArray("re_reply");
-                JSONArray like_reply = alram.getJSONArray("like_reply");
-                JSONArray like_re_reply = alram.getJSONArray("like_re_reply");*/
-
-                //System.out.println(re_reply.length());
-                //JSONObject temp = location.getJSONObject(0);
-                //String time = temp.getString("updated_time");
-                //TimeConvert.calculateGoingTime(time);
-
+            try {
+                final JSONObject alram = (JSONObject) args[0];
+                JSONObject order = (JSONObject) args[1];
+                final JSONArray temp = order.getJSONArray("order");
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mHandler.post( new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.setAlram(alram , temp);
+                                ListView mainsub2_listView = (ListView) a.findViewById(R.id.main_sub2_listview);
+                                mainsub2_listView.setAdapter(adapter);
+                            }
+                        });
+                    }
+                });
+                t.start();
+            } catch (JSONException e){
+                e.printStackTrace();
+            } catch (Exception e){
+                e.printStackTrace();
+            };
         }
     };
 

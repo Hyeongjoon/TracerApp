@@ -2,6 +2,10 @@ package com.example.admin.tracer.Helper;
 
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +16,7 @@ import java.util.TimeZone;
 /**
  * Created by admin on 2016-08-17.
  */
-public class TimeConvert {
+public class AlramHelpler {
     private static long ts = System.currentTimeMillis();
     private static Date localTime = new Date(ts);
     private static SimpleDateFormat utcTolocal = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -32,7 +36,6 @@ public class TimeConvert {
                     //String result = outputFormate.format(fDate).toString();
                     //Log.d("msg" , result);
                     Long goingTime = (localTime.getTime() - fDate.getTime())/1000;
-                    Log.d("msg" , ""+goingTime);
                     if(goingTime < min) {
                         result = "방금";
                     } else if(goingTime>= min && goingTime<hr) {
@@ -64,6 +67,4 @@ public class TimeConvert {
                     }
                 return result;
     }
-
-
 }

@@ -1,8 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
     <ImageView
-        android:id="@+id/main_sub1_imageView1"
+        android:id="@+id/main_sub2_profile_image"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:src="@drawable/none_profile"
@@ -19,6 +20,7 @@
             android:orientation="horizontal"
             android:weightSum="1">
             <TextView
+                android:id="@+id/main_sub2_profileName"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_weight="0.9"
@@ -29,6 +31,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"/>
             <TextView
+                android:id="@+id/main_sub2_time"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_weight="0.1"
@@ -38,11 +41,13 @@
                 android:gravity="center_vertical"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/main_sub2_content"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="내용이얼니ㅏㅓㅣㅏ언라ㅣㄴ어라ㅣㅇㄴㅇ나리ㅓㅇ니러ㅏㅇ니러ㅣㅇㄴ렁나런인ㅇ라ㄴㅇㄹㅇㄴㅇㄴㄹㅇㄴㄹㅇㄴㄹㅇㄴㄹㄴㅇㄹㅇㄴㄹㅇㄴㄹㅇㄴㄹㅇㄴㄹ"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:lines="2"/>
+            android:lines="2"
+            />
     </LinearLayout>
 </RelativeLayout>

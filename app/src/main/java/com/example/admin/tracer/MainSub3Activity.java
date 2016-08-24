@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 
@@ -18,7 +19,7 @@ public class MainSub3Activity extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		RelativeLayout layout = (RelativeLayout)inflater.inflate(R.layout.activity_main_sub3, container, false);
+		LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.activity_main_sub3, container, false);
 		return layout;
 	}
 }
