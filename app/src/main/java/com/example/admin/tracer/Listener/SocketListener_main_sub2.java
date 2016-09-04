@@ -2,10 +2,9 @@ package com.example.admin.tracer.Listener;
 
 import android.app.Activity;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.ListView;
 
-import com.example.admin.tracer.Adapter.Main_sub2_grid_adapter;
+import com.example.admin.tracer.Adapter.Main_sub2_list_adapter;
 import com.example.admin.tracer.R;
 import com.github.nkzawa.emitter.Emitter;
 
@@ -17,7 +16,7 @@ import org.json.JSONObject;
  * Created by admin on 2016-08-10.
  */
 public class SocketListener_main_sub2 {
-    Main_sub2_grid_adapter adapter;
+    Main_sub2_list_adapter adapter;
     Activity a;
     private Handler mHandler = new Handler();
 
@@ -52,7 +51,7 @@ public class SocketListener_main_sub2 {
 
     public void setActivity(Activity a){
         this.a = a;
-        adapter = new Main_sub2_grid_adapter(a.getApplicationContext() , R.layout.main_sub2_item);
+        adapter = new Main_sub2_list_adapter(a.getApplicationContext() , R.layout.main_sub2_item);
     }
 
     public Emitter.Listener getListener(){

@@ -44,7 +44,7 @@ public class MainSub1Activity extends Fragment {
 		socketListener.setActivity(getActivity());
 		SocketIO.getSocket().on( "GroupImageResult", socketListener.getListener());
 		SocketIO.getSocket().emit("getGroupImage" , true);
-		final CoordinatorLayout layout = (CoordinatorLayout) inflater.inflate(R.layout.activity_main_sub1, container, false);
+		final RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.activity_main_sub1, container, false);
 		return layout;
 	}
 

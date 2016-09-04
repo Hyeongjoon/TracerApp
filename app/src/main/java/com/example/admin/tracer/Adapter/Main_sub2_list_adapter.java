@@ -21,14 +21,14 @@ import org.json.JSONObject;
  * Created by admin on 2016-08-10.
  */
 
-public class Main_sub2_grid_adapter extends BaseAdapter {
+public class Main_sub2_list_adapter extends BaseAdapter {
     Context mContext;
     int layout;
     LayoutInflater inf;
     JSONArray resultArr = new JSONArray();
     JSONArray order;
 
-    public Main_sub2_grid_adapter(Context context , int layout){
+    public Main_sub2_list_adapter(Context context , int layout){
         this.layout = layout;
         this.mContext = context;
         inf = (LayoutInflater) context.getSystemService
