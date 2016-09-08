@@ -5,9 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -29,94 +33,62 @@ public class SocketListener_main_sub1 {
 
     Main_sub1_list_adapter adapter;
     Activity a;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.Adapter mAdapter;
 
     private Handler mHandler = new Handler();
 
     public void setActivity(Activity a){
         this.a = a;
-        adapter = new Main_sub1_list_adapter(a.getApplicationContext() , R.layout.main_sub1_item);
+        mLayoutManager = new LinearLayoutManager(a);
     }
 
     private Emitter.Listener mainSub1Listener = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
+            Log.d("msg" , "여기까진오냐");
             final JSONArray group = (JSONArray) args[0];
-            final int groupNum = (int)args[1];
-            Log.d("msg" , groupNum+"");
-            try{
-                Thread t = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mHandler.post( new Runnable() {
-                            @Override
-                            public void run() {
-                                ListView listView_group = (ListView)a.findViewById(R.id.main_sub1_group_list);
-                                adapter.setGroup(group , groupNum );
-                                listView_group.setAdapter(adapter);
-                                listView_group.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-                                    @Override
-                                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Main_sub1_list_adapter.ViewHolder vh = (Main_sub1_list_adapter.ViewHolder) view.getTag();
-                                        final int touchedX = (int) (vh.lastTouchedX + 0.5f);
-                                        final int touchedY = (int) (vh.lastTouchedY + 0.5f);
-
-                                        view.startDrag(null, new View.DragShadowBuilder(view) {
-
-                                            @Override
-                                            public void onProvideShadowMetrics(Point shadowSize, Point shadowTouchPoint) {
-                                                super.onProvideShadowMetrics(shadowSize, shadowTouchPoint);
-                                                shadowTouchPoint.x = touchedX;
-                                                shadowTouchPoint.y = touchedY;
-                                            }
-
-                                            @Override
-                                            public void onDrawShadow(Canvas canvas) {
-                                                super.onDrawShadow(canvas);
-                                            }
-                                        }, view, 0);
-
-                                        view.setVisibility(View.INVISIBLE);
-                                        return true;
-                                    }
-                                });
-
-                                listView_group.setOnDragListener(new View.OnDragListener() {
-                                    @Override
-                                    public boolean onDrag(View v, DragEvent event) {
-                                        switch (event.getAction()) {
-                                            case DragEvent.ACTION_DRAG_STARTED :
-                                                //etc etc. do some stuff with the drag event
-                                                break;
-                                            case DragEvent.ACTION_DRAG_LOCATION :
-                                                //do something with the position (a scroll i.e);
-                                                break;
-                                            case DragEvent.ACTION_DROP :{
-                                                Point touchPosition = getTouchPositionFromDragEvent(v, event);
-                                                Log.d("msg" , touchPosition.x+ " , " + touchPosition.y);
-                                                View view = (View) event.getLocalState();
-                                                view.setVisibility(View.VISIBLE);
-                                                break;
-                                            } case DragEvent.ACTION_DRAG_EXITED:{
-                                                break;
-                                            } case DragEvent.ACTION_DRAG_ENDED:{
-                                                View view = (View) event.getLocalState();
-                                                view.setVisibility(View.VISIBLE);
-                                                break;
-                                            }
-                                            default:
-                                        }
-                                        return true;
-                                    }
-                                });
-
+            a.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mRecyclerView = (RecyclerView) a.findViewById(R.id.main_sub1_group_list);
+                    mAdapter = new Main_sub1_list_adapter(group);
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+                    mRecyclerView.setHasFixedSize(true);
+                    mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.setOnDragListener(new View.OnDragListener() {
+                        @Override
+                        public boolean onDrag(View v, DragEvent event) {
+                            switch (event.getAction()) {
+                                case DragEvent.ACTION_DRAG_STARTED :
+                                    ListView listView = (ListView)a.findViewById(R.id.main_sub1_group_list);
+                                    //etc etc. do some stuff with the drag event
+                                    break;
+                                case DragEvent.ACTION_DRAG_LOCATION :
+                                    //do something with the position (a scroll i.e);
+                                    break;
+                                case DragEvent.ACTION_DROP :{
+                                    Point touchPosition = getTouchPositionFromDragEvent(v, event);
+                                    Log.d("msg" , touchPosition.x+ " , " + touchPosition.y);
+                                    View view = (View) event.getLocalState();
+                                    view.setVisibility(View.VISIBLE);
+                                    break;
+                                } case DragEvent.ACTION_DRAG_EXITED:{
+                                    break;
+                                } case DragEvent.ACTION_DRAG_ENDED:{
+                                    View view = (View) event.getLocalState();
+                                    view.setVisibility(View.VISIBLE);
+                                    break;
+                                }
+                                default:
                             }
-                        });
-                    }
-                });
-                t.start();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+                            return true;
+                        }
+                    });
+
+                }
+            });
         }
     };
     public static Point getTouchPositionFromDragEvent(View item, DragEvent event) {

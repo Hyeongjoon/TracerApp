@@ -19,8 +19,6 @@ import com.example.admin.tracer.Listener.SocketIO;
 import com.example.admin.tracer.Listener.SocketListener_main_sub1;
 
 
-
-
 public class MainSub1Activity extends Fragment {
 	SocketListener_main_sub1 socketListener;
 
@@ -35,29 +33,29 @@ public class MainSub1Activity extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		Log.d("msg" , "onCreate");
-
 		super.onCreate(savedInstanceState);
+
+		SocketIO.getSocket().on( "GroupImageResult", socketListener.getListener());
+		SocketIO.getSocket().emit("getGroupImage" , true);
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		socketListener.setActivity(getActivity());
-		SocketIO.getSocket().on( "GroupImageResult", socketListener.getListener());
-		SocketIO.getSocket().emit("getGroupImage" , true);
-		final RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.activity_main_sub1, container, false);
-		return layout;
+		return  inflater.inflate(R.layout.activity_main_sub1, container, false);
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
 		Log.d("msg" , "onActivityView");
 		super.onActivityCreated(savedInstanceState);
+		socketListener.setActivity(getActivity());
 	}
 
 	@Override
 	public void onStart(){
 		Log.d("msg" , "onStart");
 		super.onStart();
+
 	}
 
 	@Override
@@ -69,12 +67,17 @@ public class MainSub1Activity extends Fragment {
 	@Override
 	public void onDestroyView(){
 		Log.d("msg" , "onDestroy");
-		SocketIO.getSocket().off( "GroupImageResult", socketListener.getListener());
 		super.onDestroyView();
+	}
+
+	@Override
+	public void onStop(){
+		super.onStop();
 	}
 
 	@Override
 	public void onDestroy(){
 		super.onDestroy();
+		SocketIO.getSocket().off( "GroupImageResult", socketListener.getListener());
 	}
 }
