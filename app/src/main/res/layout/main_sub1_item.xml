@@ -4,7 +4,8 @@
     android:id="@+id/main_sub1_item"
     android:layout_width="164dp"
     android:layout_height="164dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -55,13 +56,14 @@
         </RelativeLayout>
         <TextView
             android:id="@+id/main_sub1_member_list"
-            android:layout_width="240dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="장형준 홍덕기 오태준 이영준"
             android:textSize="9dp"
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
             android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_marginRight="10dp"/>
     </RelativeLayout>
 </LinearLayout>

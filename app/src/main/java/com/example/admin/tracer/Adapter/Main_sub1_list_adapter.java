@@ -1,5 +1,6 @@
 package com.example.admin.tracer.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -38,6 +39,7 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
 
     JSONArray jsonArrayGroup;
 
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         ViewHolder vh = (ViewHolder) v.getTag();
@@ -59,28 +61,30 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
             linearLayout = (LinearLayout)v.findViewById(R.id.main_sub1_item);
             groupImage = (ImageView)v.findViewById(R.id.main_sub1_imageView);
             groupName = (TextView)v.findViewById(R.id.main_sub1_group_name);
-            groupList = (TextView)v.findViewById(R.id.main_sub1_group_list);
+            groupList = (TextView)v.findViewById(R.id.main_sub1_member_list);
             groupNum = (TextView)v.findViewById(R.id.main_sub1_group_num);
         };
+
+        public void setData(JSONObject group , ViewHolder vh){
+            try {
+                groupNum.setText(group.getString("member_number"));
+                groupName.setText(group.getString("name"));
+                groupList.setText( group.getString("memberName"));
+                if(!group.getString("file_location").equals(null)){
+                    String imageURL = group.getString("file_location");
+                    Glide.with(groupImage.getContext()).load(imageURL).into(groupImage);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public Main_sub1_list_adapter( JSONArray jsonArrayGroup ){
         this.jsonArrayGroup = jsonArrayGroup;
+
     }
-    /*
-    @Override
-    public Object getItem(int position) {
-        if( jsonArrayGroup==null){
-            return null;
-        } else {
-            try {
-                return jsonArrayGroup.getJSONObject(position);
-            } catch (JSONException e){
-                e.printStackTrace();
-                return null;
-            }
-        }
-    }*/
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -92,6 +96,13 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
+        try {
+            JSONObject group= jsonArrayGroup.getJSONObject(position);
+            holder.setData(group , holder);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,37 +167,6 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
             return  jsonArrayGroup.length();
         }
     }
-    /*
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder vh;
-        if (convertView==null) {
-            convertView = inf.inflate(layout, null);
-            convertView.setOnTouchListener(this);
-            vh = new ViewHolder(convertView);
-            convertView.setTag(vh);
-        }
-        JSONObject target = (JSONObject)getItem(position);
-        try {
-                TextView groupNum = (TextView)convertView.findViewById(R.id.main_sub1_group_num);
-                TextView groupName = (TextView)convertView.findViewById(R.id.main_sub1_group_name);
-                TextView groupMember = (TextView)convertView.findViewById(R.id.main_sub1_member_list);
-
-                groupNum.setText(target.getString("member_number"));
-                groupName.setText(target.getString("name"));
-                groupMember.setText(target.getString("memberName"));
-           if(!target.getString("file_location").equals(null)){
-                String imageURL = target.getString("file_location");
-                Glide.with(mContext).load(imageURL).into((ImageView)convertView.findViewById(R.id.main_sub1_imageView));
-            }
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return convertView;
-    }*/
 
     public void addGroup(JSONObject jsonObject){
         this.jsonArrayGroup.put(jsonObject);
