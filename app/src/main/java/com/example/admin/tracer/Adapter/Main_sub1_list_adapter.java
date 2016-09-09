@@ -102,7 +102,7 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
         holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-               /* new AdapterView.OnItemLongClickListener(){
+                new AdapterView.OnItemLongClickListener(){
                     @Override
                     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                         Main_sub1_list_adapter.ViewHolder vh = (Main_sub1_list_adapter.ViewHolder) view.getTag();
@@ -127,7 +127,7 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
                         view.setVisibility(View.INVISIBLE);
                         return true;
                     }
-                };*/
+                };
                 return true;
             }
         });

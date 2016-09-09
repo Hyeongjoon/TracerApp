@@ -30,39 +30,35 @@ import org.json.JSONObject;
  * Created by admin on 2016-07-28.
  */
 public class SocketListener_main_sub1 {
-
-    Main_sub1_list_adapter adapter;
-    Activity a;
     private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
-
-    private Handler mHandler = new Handler();
+    private RecyclerView.LayoutManager mLayoutManager;
+    Activity a;
 
     public void setActivity(Activity a){
         this.a = a;
-        mLayoutManager = new LinearLayoutManager(a);
     }
 
     private Emitter.Listener mainSub1Listener = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            Log.d("msg" , "여기까진오냐");
             final JSONArray group = (JSONArray) args[0];
-            a.runOnUiThread(new Runnable() {
+           a.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     mRecyclerView = (RecyclerView) a.findViewById(R.id.main_sub1_group_list);
-                    mAdapter = new Main_sub1_list_adapter(group);
-                    mRecyclerView.setLayoutManager(mLayoutManager);
                     mRecyclerView.setHasFixedSize(true);
+                    // use a linear layout manager
+                    mLayoutManager = new LinearLayoutManager(a);
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+                    // specify an adapter (see also next example)
+                    mAdapter = new Main_sub1_list_adapter(group);
                     mRecyclerView.setAdapter(mAdapter);
                     mRecyclerView.setOnDragListener(new View.OnDragListener() {
                         @Override
                         public boolean onDrag(View v, DragEvent event) {
                             switch (event.getAction()) {
                                 case DragEvent.ACTION_DRAG_STARTED :
-                                    ListView listView = (ListView)a.findViewById(R.id.main_sub1_group_list);
                                     //etc etc. do some stuff with the drag event
                                     break;
                                 case DragEvent.ACTION_DRAG_LOCATION :
@@ -86,11 +82,11 @@ public class SocketListener_main_sub1 {
                             return true;
                         }
                     });
-
                 }
             });
         }
     };
+
     public static Point getTouchPositionFromDragEvent(View item, DragEvent event) {
         Rect rItem = new Rect();
         item.getGlobalVisibleRect(rItem);
