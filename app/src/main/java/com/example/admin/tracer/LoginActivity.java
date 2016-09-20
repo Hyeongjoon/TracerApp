@@ -1,12 +1,20 @@
 package com.example.admin.tracer;
 
 import android.app.ProgressDialog;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.ViewTarget;
 import com.example.admin.tracer.Listener.SocketIO;
 import com.example.admin.tracer.Listener.SocketListener_login;
 
@@ -22,9 +30,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        socketListener =new SocketListener_login();
+        socketListener = new SocketListener_login();
         setContentView(R.layout.activity_login);
-
     }
 
     @Override
@@ -64,12 +71,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+    @Override
+    public void onStop(){
+        super.onStop();
+        SocketIO.getSocket().off("signUp_result" , socketListener.getListener());
+    }
 
     @Override
     public void onDestroy(){
-        SocketIO.getSocket().off("login_result" , socketListener.getListener());
         super.onDestroy();
-
+        socketListener=null;
+        findViewById(R.id.login_background).setBackground(null);
     }
 }
 

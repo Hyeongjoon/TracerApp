@@ -5,7 +5,9 @@
     tools:context="com.example.admin.tracer.OpeningActivity"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/concept0_image">
+    android:background="@drawable/concept0_image"
+    android:id="@+id/opening_background"
+    >
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"

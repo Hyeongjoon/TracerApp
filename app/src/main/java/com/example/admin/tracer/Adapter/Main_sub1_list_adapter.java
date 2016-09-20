@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridLayout;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.admin.tracer.GroupInfoActivity;
 import com.example.admin.tracer.R;
 
@@ -32,13 +35,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by admin on 2016-08-05.
  */
 public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list_adapter.ViewHolder> implements View.OnTouchListener {
 
-    JSONArray jsonArrayGroup;
-
+    List<JSONObject> mList= new ArrayList<>();;
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -65,14 +70,14 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
             groupNum = (TextView)v.findViewById(R.id.main_sub1_group_num);
         };
 
-        public void setData(JSONObject group , ViewHolder vh){
+        public void setData(JSONObject group){
             try {
                 groupNum.setText(group.getString("member_number"));
                 groupName.setText(group.getString("name"));
                 groupList.setText( group.getString("memberName"));
                 if(!group.getString("file_location").equals(null)){
                     String imageURL = group.getString("file_location");
-                    Glide.with(groupImage.getContext()).load(imageURL).into(groupImage);
+                    Glide.with(groupImage.getContext()).load(imageURL).diskCacheStrategy(DiskCacheStrategy.ALL).into(groupImage);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -81,14 +86,18 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
     }
 
     public Main_sub1_list_adapter( JSONArray jsonArrayGroup ){
-        this.jsonArrayGroup = jsonArrayGroup;
-
+        for(int i =0 ; i<jsonArrayGroup.length() ; i++){
+            try {
+                mList.add(jsonArrayGroup.getJSONObject(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_sub1_item, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -96,61 +105,25 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-        try {
-            JSONObject group= jsonArrayGroup.getJSONObject(position);
-            holder.setData(group , holder);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            JSONObject group= mList.get(position);
+            holder.setData(group);
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-
-        holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                new AdapterView.OnItemLongClickListener(){
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                        Main_sub1_list_adapter.ViewHolder vh = (Main_sub1_list_adapter.ViewHolder) view.getTag();
-                        final int touchedX = (int) (vh.lastTouchedX + 0.5f);
-                        final int touchedY = (int) (vh.lastTouchedY + 0.5f);
-
-                        view.startDrag(null, new View.DragShadowBuilder(view) {
-
-                            @Override
-                            public void onProvideShadowMetrics(Point shadowSize, Point shadowTouchPoint) {
-                                super.onProvideShadowMetrics(shadowSize, shadowTouchPoint);
-                                shadowTouchPoint.x = touchedX;
-                                shadowTouchPoint.y = touchedY;
-                            }
-
-                            @Override
-                            public void onDrawShadow(Canvas canvas) {
-                                super.onDrawShadow(canvas);
-                            }
-                        }, view, 0);
-
-                        view.setVisibility(View.INVISIBLE);
-                        return true;
-                    }
-                };
-                return true;
-            }
-        });
     }
+
+
 
     @Override
     public long getItemId(int position) {
-        if(jsonArrayGroup == null){
+        if(mList.size()==0){
             return 0;
         } else{
             try {
-                JSONObject targetJSON = (JSONObject)jsonArrayGroup.getJSONObject(position);
+                JSONObject targetJSON = mList.get(position);
                 return targetJSON.getInt("gid");
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -161,14 +134,30 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
 
     @Override
     public int getItemCount() {
-        if(jsonArrayGroup==null){
+        if(mList.size()==0){
             return 0;
         } else {
-            return  jsonArrayGroup.length();
+            return  mList.size();
         }
     }
 
+    public List getDataList(){
+        return mList;
+    }
+
+    public List getDataOrder(){
+        List temp = new ArrayList();
+        for(int i =0 ; i<mList.size() ; i++){
+            try {
+                temp.add(mList.get(i).getString("gid"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return temp;
+    }
+
     public void addGroup(JSONObject jsonObject){
-        this.jsonArrayGroup.put(jsonObject);
+
     }
 }

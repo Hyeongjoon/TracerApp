@@ -15,6 +15,7 @@ import android.view.View;
  */
 public class OpeningActivity extends AppCompatActivity {
     public static Activity OpeningActivity;
+    private int state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class OpeningActivity extends AppCompatActivity {
         if(isRunIntro) {
             beforeIntro();
         } else {
+            state = 1;
             afterIntro(savedInstanceState);
         }
     }
@@ -70,6 +72,14 @@ public class OpeningActivity extends AppCompatActivity {
                 startActivity(intent);
                 return;
             }
+        }
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(state == 1) {
+            findViewById(R.id.opening_background).setBackground(null);
+            state =0;
         }
     }
 }

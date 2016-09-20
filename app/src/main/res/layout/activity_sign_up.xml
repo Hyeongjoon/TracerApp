@@ -4,7 +4,9 @@
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      tools:context="com.example.admin.tracer.LoginActivity"
-     android:background="@drawable/concept0_image">
+     android:background="@drawable/concept0_image"
+    android:id="@+id/signUp_background"
+    >
 
     <!--도입 문구 장행준 코쟁이-->
     <LinearLayout

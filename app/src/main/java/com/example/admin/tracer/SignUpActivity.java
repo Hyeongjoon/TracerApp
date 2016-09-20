@@ -74,10 +74,15 @@ public class SignUpActivity extends AppCompatActivity {
                 }
         }
     }
-
+    @Override
+    public void onStop(){
+        super.onStop();
+        SocketIO.getSocket().off("signUp_result" , socketListener.getListener());
+    }
     @Override
     protected void onDestroy(){
-        SocketIO.getSocket().off("signUp_result" , socketListener.getListener());
         super.onDestroy();
+        socketListener=null;
+        findViewById(R.id.signUp_background).setBackground(null);
     }
 }

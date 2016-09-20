@@ -21,7 +21,6 @@ public class MainSub2Activity extends Fragment {
 	@Override
 	public void onAttach(Context c){
 		socketListener = new SocketListener_main_sub2();
-		Log.d("msg" , "onAttach");
 		super.onAttach(c);
 	}
 
@@ -42,24 +41,24 @@ public class MainSub2Activity extends Fragment {
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState){
-		Log.d("msg" , "onActivityView");
+
 		super.onActivityCreated(savedInstanceState);
 	}
 
 	@Override
 	public void onStart(){
-		Log.d("msg" , "onStart");
+
 		super.onStart();
 	}
 
 	@Override
 	public void onResume(){
-		Log.d("msg" , "onResume");
+
 		super.onResume();
 	}
 
 	public void onDestroyView(){
-		Log.d("msg" , "onDestroy");
+
 		SocketIO.getSocket().off( "alramResult", socketListener.getListener());
 		super.onDestroyView();
 	}

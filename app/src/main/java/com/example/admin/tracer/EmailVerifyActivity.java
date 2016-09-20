@@ -73,4 +73,9 @@ public class EmailVerifyActivity extends AppCompatActivity {
             }
         }
     }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        findViewById(R.id.email_background).setBackground(null);
+    }
 }

@@ -1,75 +1,30 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_sub1_linear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:importantForAccessibility="no"
-    android:weightSum="4"
-    android:background="@drawable/packground">
+    android:importantForAccessibility="no">
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/ico_1"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_margin="10dp"/>
-    </RelativeLayout>
-
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:importantForAccessibility="no"
-        android:orientation="vertical"
-        android:layout_weight="2">
-
-        <Button
+        <LinearLayout
+            android:id="@+id/main_sub1_mid"
+            android:background="@drawable/packground"
             android:layout_width="match_parent"
-            android:layout_height="27dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/add_button"
-            android:text="add group+"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/main_sub1_group_list"
-            android:fitsSystemWindows="false"
-            android:scrollbars="none"
-            android:layout_centerInParent="true"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/ico_1"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"/>
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/ico_1"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"/>
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/ico_1"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"/>
-    </LinearLayout>
-
-
-</LinearLayout>
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:orientation="vertical"
+            >
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/add_button"
+                android:text="add group+"/>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_sub1_group_list"
+                android:scrollbars="none"
+                />
+        </LinearLayout>
+</RelativeLayout>

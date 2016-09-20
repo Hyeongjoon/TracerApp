@@ -2,33 +2,33 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_sub1_item"
-    android:layout_width="164dp"
-    android:layout_height="164dp"
+    android:layout_width="328dp"
+    android:layout_height="328dp"
     android:orientation="vertical"
     android:layout_margin="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="27dp"
+        android:layout_height="54dp"
         android:background="@drawable/item1_top">
         <TextView
             android:id="@+id/main_sub1_group_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="샌드위치"
-            android:textSize="17dp"
+            android:textSize="34dp"
             android:layout_centerInParent="true"/>
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="220dp"
         android:background="#2E2E2E">
         <ImageView
             android:id="@+id/main_sub1_imageView"
-            android:layout_width="160dp"
-            android:layout_height="106dp"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
             android:background="@drawable/none_profile"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
@@ -36,34 +36,34 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="27dp"
+        android:layout_height="54dp"
         android:background="@drawable/item1_bottom">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="22dp"
+                android:layout_width="80dp"
+                android:layout_height="44dp"
                 android:background="@drawable/image_fail"/>
             <TextView
                 android:id="@+id/main_sub1_group_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="8"
-                android:textSize="10dp"
+                android:textSize="20dp"
                 android:layout_centerInParent="true"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
         <TextView
             android:id="@+id/main_sub1_member_list"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="장형준 홍덕기 오태준 이영준"
-            android:textSize="9dp"
+            android:textSize="18dp"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
             android:ellipsize="end"
             android:singleLine="true"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="20dp"/>
     </RelativeLayout>
 </LinearLayout>
