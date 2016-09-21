@@ -82,7 +82,6 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        socketListener=null;
         findViewById(R.id.signUp_background).setBackground(null);
     }
 }

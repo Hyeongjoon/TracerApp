@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.admin.tracer.Listener.SocketIO;
 import com.example.admin.tracer.Listener.SocketListener_main_sub1;
 
@@ -22,7 +23,6 @@ public class MainSub1Activity extends Fragment {
 		super.onAttach(c);
 	}
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,8 +31,6 @@ public class MainSub1Activity extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.activity_main_sub1, container, false);
-		SocketIO.getSocket().on( "GroupImageResult", socketListener.getListener());
-		SocketIO.getSocket().emit("getGroupImage" , true);
 		return view;
 
 	}
@@ -46,6 +44,9 @@ public class MainSub1Activity extends Fragment {
 	@Override
 	public void onStart(){
 		super.onStart();
+		SocketIO.getSocket().on( "GroupImageResult", socketListener.getListener());
+		SocketIO.getSocket().on("addGroupResult" , socketListener.getAddListener());
+		SocketIO.getSocket().emit("getGroupImage" , true);
 	}
 
 	@Override
@@ -57,13 +58,14 @@ public class MainSub1Activity extends Fragment {
 	@Override
 	public void onDestroyView(){
 		super.onDestroyView();
-		SocketIO.getSocket().off( "GroupImageResult", socketListener.getListener());
+
 	}
 
 	@Override
 	public void onStop(){
-
 		super.onStop();
+		SocketIO.getSocket().off( "GroupImageResult", socketListener.getListener());
+		SocketIO.getSocket().off("addGroupResult" , socketListener.getAddListener());
 	}
 
 	@Override
@@ -74,6 +76,11 @@ public class MainSub1Activity extends Fragment {
 	@Override
 	public void onDetach(){
 		super.onDetach();
-		socketListener=null;
 	}
+
+	public void makeGroup(String groupName){
+
+		SocketIO.getSocket().emit("addGroup" , groupName);
+	}
+
 }

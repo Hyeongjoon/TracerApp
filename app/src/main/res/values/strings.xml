@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Tracer</string>
     <string name="facebook_app_id">942011542574680</string>
+    <string name="sub1_group_create">add group</string>
+    <string name="sub1_group_create_title">새로 생성할 그룹의 이름을 설정해주세요</string>
+    <string name="cancel">Cancel</string>
 </resources>

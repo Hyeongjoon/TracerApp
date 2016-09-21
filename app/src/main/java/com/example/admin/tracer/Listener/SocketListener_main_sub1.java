@@ -83,9 +83,13 @@ public class SocketListener_main_sub1 {
                             super.clearView(recyclerView , viewHolder);
                             if(state==ItemTouchHelper.ACTION_STATE_DRAG){
                                 state = -1;
-                                SocketIO.getSocket().emit("changedList" , ((Main_sub1_list_adapter)recyclerView.getAdapter()).getDataOrder());
+                                JSONArray data = new JSONArray();
+                                List list = ((Main_sub1_list_adapter)recyclerView.getAdapter()).getDataOrder();
+                                for(int i = 0 ; i < list.size() ; i++){
+                                    data.put(list.get(i));
+                                }
+                                SocketIO.getSocket().emit("changedList" , data);
                             }
-                            //
                         }
 
                         @Override
@@ -118,9 +122,15 @@ public class SocketListener_main_sub1 {
             });
         }
     };
+    private Emitter.Listener mainSub1AddGroupListener = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
 
+        }
+    };
 
     public Emitter.Listener getListener(){
         return mainSub1Listener;
     }
+    public Emitter.Listener getAddListener(){ return mainSub1AddGroupListener; }
 }

@@ -15,11 +15,14 @@
             android:orientation="vertical"
             >
             <Button
+                android:id="@+id/main_sub1_add_group"
                 android:layout_width="match_parent"
                 android:layout_height="27dp"
                 android:layout_margin="8dp"
                 android:background="@drawable/add_button"
-                android:text="add group+"/>
+                android:text="@string/sub1_group_create"
+                android:onClick="main_onClick"
+                />
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

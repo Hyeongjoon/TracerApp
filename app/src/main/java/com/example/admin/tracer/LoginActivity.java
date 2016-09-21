@@ -80,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onDestroy(){
         super.onDestroy();
-        socketListener=null;
         findViewById(R.id.login_background).setBackground(null);
     }
 }
