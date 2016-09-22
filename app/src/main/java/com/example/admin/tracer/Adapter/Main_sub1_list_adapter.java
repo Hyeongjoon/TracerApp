@@ -41,17 +41,10 @@ import java.util.List;
 /**
  * Created by admin on 2016-08-05.
  */
-public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list_adapter.ViewHolder> implements View.OnTouchListener {
+public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list_adapter.ViewHolder>  {
 
     List<JSONObject> mList= new ArrayList<>();;
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        ViewHolder vh = (ViewHolder) v.getTag();
-        vh.lastTouchedX = event.getX();
-        vh.lastTouchedY = event.getY();
-        return false;
-    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView groupImage;
@@ -59,8 +52,6 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
         public TextView groupList;
         public TextView groupNum;
         public LinearLayout linearLayout;
-        public float lastTouchedX;
-        public float lastTouchedY;
         public ViewHolder(View v) {
             super(v);
             linearLayout = (LinearLayout)v.findViewById(R.id.main_sub1_item);
@@ -158,6 +149,10 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
     }
 
     public void addGroup(JSONObject jsonObject){
+        mList.add(0 , jsonObject);
+    }
+
+    public void deleteGroup(int position){
 
     }
 }

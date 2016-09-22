@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -25,7 +26,7 @@ import com.example.admin.tracer.Helper.GroupNameHelper;
 public class MainActivity extends FragmentActivity  {
 
 	private int NUM_PAGES = 3;		// 최대 페이지의 수
-
+	private boolean enabled;
 	/* Fragment numbering */
 	public final static int FRAGMENT_PAGE1 = 0;
 	public final static int FRAGMENT_PAGE2 = 1;
@@ -33,6 +34,10 @@ public class MainActivity extends FragmentActivity  {
 
 	ViewPager mViewPager;			// View pager를 지칭할 변수
 	pagerAdapter pagerAdapter;
+
+
+	public MainActivity() {
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +55,14 @@ public class MainActivity extends FragmentActivity  {
 
 			@Override
 			public void onPageSelected(int position) {
+				if(position==FRAGMENT_PAGE1) {
 
+				}
 			}
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 				// TODO Auto-generated method stub
-
 			}
 
 			@Override

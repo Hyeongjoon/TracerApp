@@ -1,6 +1,8 @@
 package com.example.admin.tracer.Listener;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -12,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -43,7 +46,7 @@ import java.util.List;
  */
 public class SocketListener_main_sub1 {
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private  Main_sub1_list_adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     Activity a;
 
@@ -103,15 +106,34 @@ public class SocketListener_main_sub1 {
                         }
 
                         @Override
-                        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                            //mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                        public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(a);
+                            builder.setTitle(R.string.sub1_group_delete_title);
+                            builder.setPositiveButton(R.string.ok ,new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    SocketIO.getSocket().emit("deleteGroup" , mAdapter.getItemId(viewHolder.getAdapterPosition()));
+                                    mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                                }
+                            });
+                            builder.setNegativeButton(R.string.cancel ,new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    mAdapter.notifyDataSetChanged();
+                                    dialogInterface.cancel();
+                                }
+                            });
+                            builder.show();
                         }
+
 
                         //defines the enabled move directions in each state (idle, swiping, dragging).
                         @Override
                         public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                            return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
-                                    ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
+                            int dragFlags = ItemTouchHelper.UP|ItemTouchHelper.DOWN;
+                            int swipeFlags = ItemTouchHelper.RIGHT;
+
+                            return makeMovementFlags(dragFlags , swipeFlags);
 
                         }
                     };
@@ -125,6 +147,15 @@ public class SocketListener_main_sub1 {
     private Emitter.Listener mainSub1AddGroupListener = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
+                JSONObject jsonObject = (JSONObject)args[0];
+                mAdapter.addGroup(jsonObject);
+            a.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mAdapter.notifyItemInserted(0);
+                    mRecyclerView.scrollToPosition(0);
+                }
+            });
 
         }
     };
