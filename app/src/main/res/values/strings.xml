@@ -5,5 +5,7 @@
     <string name="sub1_group_create_title">새로 생성할 그룹의 이름을 설정해주세요</string>
     <string name="cancel">Cancel</string>
     <string name="sub1_group_delete_title">그룹에 탈퇴하겠습니까?</string>
+    <string name="sub1_group_wrong_create">그룹 이름은 1자이상 해주세요</string>
+    <string name="sub1_group_change_name">변경할 이름을 적어주세요</string>
     <string name="ok">Ok</string>
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="main_sub1_click">
+        <item>들어가기</item>
+        <item>그룹 태그 복사하기</item>
+        <item>그룹 이름 변경하기</item>
+    </string-array>
+
+</resources>

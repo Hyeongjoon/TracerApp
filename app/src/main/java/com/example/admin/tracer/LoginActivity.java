@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onStop(){
         super.onStop();
         SocketIO.getSocket().off("signUp_result" , socketListener.getListener());
+        SocketIO.getSocket().off("login");
     }
 
     @Override

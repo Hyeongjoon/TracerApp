@@ -57,8 +57,7 @@ public class SocketListener_main_sub1 {
     private Emitter.Listener mainSub1Listener = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            final JSONArray group = (JSONArray) args[0];
-
+           final JSONArray group = (JSONArray) args[0];
            a.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -112,8 +111,10 @@ public class SocketListener_main_sub1 {
                             builder.setPositiveButton(R.string.ok ,new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    SocketIO.getSocket().emit("deleteGroup" , mAdapter.getItemId(viewHolder.getAdapterPosition()));
-                                    mAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                                    int position = viewHolder.getAdapterPosition();
+                                    JSONArray jsonArray = mAdapter.deleteGroup(position);
+                                    SocketIO.getSocket().emit("deleteGroup" , jsonArray , position);
+                                    mAdapter.notifyItemRemoved(position);
                                 }
                             });
                             builder.setNegativeButton(R.string.cancel ,new DialogInterface.OnClickListener() {
@@ -132,7 +133,6 @@ public class SocketListener_main_sub1 {
                         public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                             int dragFlags = ItemTouchHelper.UP|ItemTouchHelper.DOWN;
                             int swipeFlags = ItemTouchHelper.RIGHT;
-
                             return makeMovementFlags(dragFlags , swipeFlags);
 
                         }

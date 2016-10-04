@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.admin.tracer.Helper.GroupNameHelper;
 
@@ -96,7 +97,6 @@ public class MainActivity extends FragmentActivity  {
 							}
 							return mainSub1Activity;
 						}
-
 						case 1: {
 							if(mainSub2Activity==null){
 								mainSub2Activity = new MainSub2Activity();
@@ -135,8 +135,8 @@ public class MainActivity extends FragmentActivity  {
 		switch (v.getId()){
 			case R.id.main_sub1_add_group :{
 				final AlertDialog.Builder wrongGroupName = new AlertDialog.Builder(this);
-				wrongGroupName.setTitle("그룹 이름은 1자이상 해주세요");
-				wrongGroupName.setPositiveButton("Ok" , new DialogInterface.OnClickListener() {
+				wrongGroupName.setTitle(R.string.sub1_group_wrong_create);
+				wrongGroupName.setPositiveButton(R.string.ok , new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.cancel();
@@ -152,6 +152,12 @@ public class MainActivity extends FragmentActivity  {
 				input.setSelectAllOnFocus(true);
 				builder.setView(input);
 				// Set up the buttons
+				builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				});
 				builder.setPositiveButton(R.string.sub1_group_create, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -163,17 +169,13 @@ public class MainActivity extends FragmentActivity  {
 						}
 					}
 				});
-				builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.cancel();
-					}
-				});
+
 				AlertDialog mDialog = builder.create();
 				mDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 				mDialog.show();
 				return;
 			}
 		}
+
 	}
 }

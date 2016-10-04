@@ -65,6 +65,10 @@ public class MainSub1Activity extends Fragment {
 		super.onStop();
 		SocketIO.getSocket().off( "GroupImageResult", socketListener.getListener());
 		SocketIO.getSocket().off("addGroupResult" , socketListener.getAddListener());
+		SocketIO.getSocket().off("getGroupImage");
+		SocketIO.getSocket().off("addGroup");
+		SocketIO.getSocket().off("changedList");
+		SocketIO.getSocket().off("deleteGroup");
 	}
 
 	@Override
