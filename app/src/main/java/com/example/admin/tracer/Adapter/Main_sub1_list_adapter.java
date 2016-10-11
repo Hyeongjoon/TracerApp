@@ -5,36 +5,21 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Point;
-import android.media.Image;
-import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.admin.tracer.GroupInfoActivity;
+import com.example.admin.tracer.GroupActivity;
 import com.example.admin.tracer.Listener.SocketIO;
 import com.example.admin.tracer.R;
 
@@ -48,9 +33,10 @@ import java.util.List;
 /**
  * Created by admin on 2016-08-05.
  */
+
 public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list_adapter.ViewHolder>  {
 
-    List<JSONObject> mList= new ArrayList<>();;
+    private List<JSONObject> mList= new ArrayList<>();;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView groupImage;
@@ -58,6 +44,7 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
         public TextView groupList;
         public TextView groupNum;
         public LinearLayout linearLayout;
+
         public ViewHolder(View v) {
             super(v);
             linearLayout = (LinearLayout)v.findViewById(R.id.main_sub1_item);
@@ -113,10 +100,12 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
                     public void onClick(DialogInterface dialogInterface, int which) {
                         switch (which) {
                             case 0 : {
-
+                                Intent intent = new Intent(holder.linearLayout.getContext() , GroupActivity.class);
+                                intent.putExtra("gid" , getItemId(position));
+                                holder.linearLayout.getContext().startActivity(intent);
                                 return;
                             }case 1 :{
-
+                                SocketIO.getSocket().emit("getCode" , getItemId(position));
                                 return;
                             }case 2 : {
                                 Context context = holder.linearLayout.getContext();
@@ -129,7 +118,7 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
                                     }
                                 });
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                builder.setTitle(R.string.sub1_group_create_title);
+                                builder.setTitle(R.string.sub1_group_change_name);
                                 final EditText input = new EditText(context);
                                 input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
                                 input.setText(holder.groupName.getText());
@@ -222,5 +211,15 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
         }
         mList.remove(position);
         return temp;
+    }
+
+    public void changeNameData(String name, int postion){
+        try {
+            JSONObject temp = mList.get(postion);
+            temp.put("name" , name);
+            mList.set(postion,temp);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

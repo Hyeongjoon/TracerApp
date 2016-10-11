@@ -35,6 +35,7 @@ import com.github.nkzawa.engineio.client.Socket;
 
 import org.json.JSONArray;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -127,14 +128,12 @@ public class SocketListener_main_sub1 {
                             builder.show();
                         }
 
-
                         //defines the enabled move directions in each state (idle, swiping, dragging).
                         @Override
                         public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                             int dragFlags = ItemTouchHelper.UP|ItemTouchHelper.DOWN;
                             int swipeFlags = ItemTouchHelper.RIGHT;
                             return makeMovementFlags(dragFlags , swipeFlags);
-
                         }
                     };
                     ItemTouchHelper ith = new ItemTouchHelper(_ithCallback);
@@ -160,8 +159,44 @@ public class SocketListener_main_sub1 {
         }
     };
 
+    private Emitter.Listener mainSub1ChangeGroupListener = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            JSONObject jsonObject = (JSONObject)args[0];
+            try {
+                final int postion = jsonObject.getInt("view_order");
+                final String name = jsonObject.getString("name");
+                a.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter.changeNameData(name , postion);
+                        mAdapter.notifyItemChanged(postion);
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    };
+
+    private Emitter.Listener mainsSub1GetCode = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            a.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    //여기가 받아서 alert창 보여주는곳
+                    AlertDialog.Builder builder = new AlertDialog.Builder(a);
+                }
+            });
+        }
+    };
+
     public Emitter.Listener getListener(){
         return mainSub1Listener;
     }
     public Emitter.Listener getAddListener(){ return mainSub1AddGroupListener; }
+    public Emitter.Listener getChangeListener(){ return mainSub1ChangeGroupListener;}
+
 }

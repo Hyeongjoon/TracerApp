@@ -78,7 +78,6 @@ public class SignUpActivity extends AppCompatActivity {
     public void onStop(){
         super.onStop();
         SocketIO.getSocket().off("signUp_result" , socketListener.getListener());
-        SocketIO.getSocket().off("signUp");
     }
     @Override
     protected void onDestroy(){
