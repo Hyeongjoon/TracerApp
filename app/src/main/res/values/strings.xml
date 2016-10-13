@@ -7,6 +7,12 @@
     <string name="sub1_group_delete_title">그룹에 탈퇴하겠습니까?</string>
     <string name="sub1_group_wrong_create">그룹 이름은 1자이상 해주세요</string>
     <string name="sub1_group_change_name">변경할 이름을 적어주세요</string>
+    <string name="sub1_group_show_code">그룹 코드 보기</string>
     <string name="sub2_code_input">코 드 입 력</string>
+    <string name="sub2_wrong_code">잘못된 코드를 입력했습니다</string>
+    <string name="server_err">내부 서버 오류입니다.</string>
+    <string name="sub2_alread_exist">이미 그룹에 존재합니다.</string>
+    <string name="sub2_no_code">존재 하지 않는 코드입니다.</string>
+    <string name="sub2_add_success">그룹 추가 성공</string>
     <string name="ok">Ok</string>
 </resources>

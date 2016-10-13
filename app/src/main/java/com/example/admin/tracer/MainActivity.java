@@ -1,12 +1,17 @@
 package com.example.admin.tracer;
 
 
+import android.app.Notification;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -17,24 +22,31 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.admin.tracer.Adapter.Main_sub1_list_adapter;
 import com.example.admin.tracer.Helper.GroupNameHelper;
+import com.example.admin.tracer.Listener.SocketIO;
+import com.example.admin.tracer.Listener.SocketListener_main_sub1;
+
+import org.json.JSONObject;
 
 
 /* 수정된 Main Activity */
 public class MainActivity extends FragmentActivity  {
 
 	private int NUM_PAGES = 3;		// 최대 페이지의 수
-	private boolean enabled;
+
 	/* Fragment numbering */
 	public final static int FRAGMENT_PAGE1 = 0;
 	public final static int FRAGMENT_PAGE2 = 1;
 	public final static int FRAGMENT_PAGE3 = 2;
 
+
 	ViewPager mViewPager;			// View pager를 지칭할 변수
-	pagerAdapter pagerAdapter;
+	private pagerAdapter pagerAdapter;
 
 
 	public MainActivity() {
@@ -174,8 +186,11 @@ public class MainActivity extends FragmentActivity  {
 				mDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 				mDialog.show();
 				return;
+			} case R.id.main_sub2_add_code : {
+				((MainSub2Activity)this.pagerAdapter.getItem(1)).click();
+				return;
 			}
 		}
-
 	}
+
 }

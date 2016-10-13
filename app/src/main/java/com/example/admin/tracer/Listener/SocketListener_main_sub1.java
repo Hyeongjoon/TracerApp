@@ -45,9 +45,11 @@ import java.util.List;
 /**
  * Created by admin on 2016-07-28.
  */
+
 public class SocketListener_main_sub1 {
+
     private RecyclerView mRecyclerView;
-    private  Main_sub1_list_adapter mAdapter;
+    private Main_sub1_list_adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     Activity a;
 
@@ -116,6 +118,7 @@ public class SocketListener_main_sub1 {
                                     JSONArray jsonArray = mAdapter.deleteGroup(position);
                                     SocketIO.getSocket().emit("deleteGroup" , jsonArray , position);
                                     mAdapter.notifyItemRemoved(position);
+                                    dialogInterface.cancel();
                                 }
                             });
                             builder.setNegativeButton(R.string.cancel ,new DialogInterface.OnClickListener() {
@@ -183,20 +186,35 @@ public class SocketListener_main_sub1 {
     private Emitter.Listener mainsSub1GetCode = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
+            final String code = (String)args[0];
             a.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    //여기가 받아서 alert창 보여주는곳
                     AlertDialog.Builder builder = new AlertDialog.Builder(a);
+                    builder.setTitle(R.string.sub1_group_show_code);
+                    builder.setMessage(code);
+                    builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    builder.show();
                 }
             });
         }
     };
 
-    public Emitter.Listener getListener(){
-        return mainSub1Listener;
-    }
+    private Emitter.Listener addBycode = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+
+        }
+    };
+
+    public Emitter.Listener getListener(){return mainSub1Listener;}
     public Emitter.Listener getAddListener(){ return mainSub1AddGroupListener; }
     public Emitter.Listener getChangeListener(){ return mainSub1ChangeGroupListener;}
-
+    public Emitter.Listener getCodeListener(){return mainsSub1GetCode;}
+    public Emitter.Listener getAddByCodeListener(){return addBycode;}
 }

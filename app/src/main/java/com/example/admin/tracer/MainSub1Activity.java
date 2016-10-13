@@ -14,10 +14,8 @@ import com.example.admin.tracer.Listener.SocketListener_main_sub1;
 
 public class MainSub1Activity extends Fragment {
 	SocketListener_main_sub1 socketListener;
-
 	@Override
 	public void onAttach(Context c){
-
 		socketListener = new SocketListener_main_sub1();
 		super.onAttach(c);
 	}
@@ -31,7 +29,6 @@ public class MainSub1Activity extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.activity_main_sub1, container, false);
 		return view;
-
 	}
 
 	@Override
@@ -46,19 +43,18 @@ public class MainSub1Activity extends Fragment {
 		SocketIO.getSocket().on( "GroupImageResult", socketListener.getListener());
 		SocketIO.getSocket().on("addGroupResult" , socketListener.getAddListener());
 		SocketIO.getSocket().on("changeGroup" , socketListener.getChangeListener());
+		SocketIO.getSocket().on("codeResult" , socketListener.getCodeListener());
 		SocketIO.getSocket().emit("getGroupImage" , true);
 	}
 
 	@Override
 	public void onResume(){
-
 		super.onResume();
 	}
 
 	@Override
 	public void onDestroyView(){
 		super.onDestroyView();
-
 	}
 
 	@Override
@@ -67,6 +63,7 @@ public class MainSub1Activity extends Fragment {
 		SocketIO.getSocket().off( "GroupImageResult", socketListener.getListener());
 		SocketIO.getSocket().off("addGroupResult" , socketListener.getAddListener());
 		SocketIO.getSocket().off("changeGroup" , socketListener.getChangeListener());
+		SocketIO.getSocket().off("codeResult" , socketListener.getCodeListener());
 		//SocketIO.getSocket().off("getGroupImage");
 		//SocketIO.getSocket().off("addGroup");
 		//SocketIO.getSocket().off("changedList");
