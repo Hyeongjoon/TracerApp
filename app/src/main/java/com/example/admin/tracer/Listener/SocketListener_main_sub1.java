@@ -205,16 +205,9 @@ public class SocketListener_main_sub1 {
         }
     };
 
-    private Emitter.Listener addBycode = new Emitter.Listener() {
-        @Override
-        public void call(Object... args) {
-
-        }
-    };
-
     public Emitter.Listener getListener(){return mainSub1Listener;}
     public Emitter.Listener getAddListener(){ return mainSub1AddGroupListener; }
     public Emitter.Listener getChangeListener(){ return mainSub1ChangeGroupListener;}
     public Emitter.Listener getCodeListener(){return mainsSub1GetCode;}
-    public Emitter.Listener getAddByCodeListener(){return addBycode;}
+
 }

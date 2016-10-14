@@ -102,7 +102,7 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
                         switch (which) {
                             case 0 : {
                                 Intent intent = new Intent(holder.linearLayout.getContext() , GroupActivity.class);
-                                intent.putExtra("gid" , getItemId(position));
+                                intent.putExtra("gid" , (int)getItemId(position));
                                 holder.linearLayout.getContext().startActivity(intent);
                                 return;
                             }case 1 :{

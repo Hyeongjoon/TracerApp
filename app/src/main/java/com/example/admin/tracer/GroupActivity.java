@@ -18,9 +18,8 @@ public class GroupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group);
         Intent intent =getIntent();
-        int temp = intent.getExtras().getInt("gid");
+        int temp = intent.getIntExtra("gid" , 0);
         TextView textView = (TextView)findViewById(R.id.groupGid);
-        Log.d("msg" , temp + "");
         textView.setText(temp+"");
 
     }
