@@ -81,7 +81,7 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_sub1_item, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -102,11 +102,11 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
                         switch (which) {
                             case 0 : {
                                 Intent intent = new Intent(holder.linearLayout.getContext() , GroupActivity.class);
-                                intent.putExtra("gid" , (int)getItemId(position));
+                                intent.putExtra("gid" , (int)getItemId(holder.getAdapterPosition()));
                                 holder.linearLayout.getContext().startActivity(intent);
                                 return;
                             }case 1 :{
-                                SocketIO.getSocket().emit("getCode" , getItemId(position));
+                                SocketIO.getSocket().emit("getCode" , getItemId(holder.getAdapterPosition()));
                                 return;
                             }case 2 : {
                                 Context context = holder.linearLayout.getContext();
@@ -138,7 +138,7 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
                                         if (groupName.length() == 0) {
                                             wrongGroupName.show();
                                         } else {
-                                            SocketIO.getSocket().emit("changeGroupName" , groupName , getItemId(position));
+                                            SocketIO.getSocket().emit("changeGroupName" , groupName , getItemId(holder.getAdapterPosition()));
                                         }
                                     }
                                 });
@@ -222,5 +222,12 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void changeOrder(int a , int b){
+        JSONObject origin = mList.get(a);
+        JSONObject target = mList.get(b);
+        mList.set(a,target);
+        mList.set(b , origin);
     }
 }

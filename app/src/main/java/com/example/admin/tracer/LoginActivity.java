@@ -37,8 +37,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        SocketIO.getSocket().on("login_result" , socketListener.getListener());
         socketListener.setDialogActivity(this);
+        SocketIO.getSocket().on("login_result" , socketListener.getListener());
+
     }
 
     public void Login_ButtonClick(View v) {

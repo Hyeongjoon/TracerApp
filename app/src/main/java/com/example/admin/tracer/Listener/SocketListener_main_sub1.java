@@ -76,9 +76,10 @@ public class SocketListener_main_sub1 {
                         @Override
                         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                             // get the viewHolder's and target's positions in your adapter data, swap them
-                            Collections.swap( ((Main_sub1_list_adapter)recyclerView.getAdapter()).getDataList() , viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                            mAdapter.changeOrder(viewHolder.getAdapterPosition() , target.getAdapterPosition());
                             // and notify the adapter that its dataset has changed
                             state = ItemTouchHelper.ACTION_STATE_DRAG;
+
                             mAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
                             return true;
                         }
@@ -89,7 +90,7 @@ public class SocketListener_main_sub1 {
                             if(state==ItemTouchHelper.ACTION_STATE_DRAG){
                                 state = -1;
                                 JSONArray data = new JSONArray();
-                                List list = ((Main_sub1_list_adapter)recyclerView.getAdapter()).getDataOrder();
+                                List list = mAdapter.getDataOrder();
                                 for(int i = 0 ; i < list.size() ; i++){
                                     data.put(list.get(i));
                                 }
