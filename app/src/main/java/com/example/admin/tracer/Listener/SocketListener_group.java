@@ -10,6 +10,7 @@ import com.example.admin.tracer.R;
 import com.github.nkzawa.emitter.Emitter;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Created by admin on 2016-10-17.
@@ -22,33 +23,51 @@ public class SocketListener_group {
 
     Activity a;
 
-    private Emitter.Listener GroupFileListener = new Emitter.Listener() {
+    private Emitter.Listener groupFileListener = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
             if(args[0].equals(false)){
                 //에러처리
             } else {
                 final JSONArray list = (JSONArray)args[0];
-                Log.d("msg" , list+"");
                 a.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mRecyclerView = (RecyclerView) a.findViewById(R.id.group_list);
+                        mRecyclerView = (RecyclerView)a.findViewById(R.id.group_list);
+                        mRecyclerView.setHasFixedSize(false);
                         mAdapter = new Group_first_adapter(list);
                         mLayoutManager = new LinearLayoutManager(a);
-                        Log.d("msg" , "여기까진 오냐?");
                         mRecyclerView.setLayoutManager(mLayoutManager);
                         mRecyclerView.setAdapter(mAdapter);
+                        mRecyclerView.scrollToPosition(mAdapter.getItemCount()-1);
                     }
                 });
+            }
+        }
+    };
 
+    private Emitter.Listener addFileResultListener = new Emitter.Listener() {
+
+        @Override
+        public void call(Object... args) {
+            if(args[0].equals(false)){
+                //에러처리
+            } else{
+                final JSONObject target = (JSONObject)args[0];
+                a.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdapter.addItem(target);
+                    }
+                });
             }
         }
     };
 
     public Emitter.Listener getGroupFileListener(){
-        return GroupFileListener;
+        return groupFileListener;
     }
+    public Emitter.Listener getAddFileResultListener(){return addFileResultListener;}
 
     public void setActivity(Activity a){
         this.a = a;

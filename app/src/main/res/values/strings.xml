@@ -14,5 +14,8 @@
     <string name="sub2_alread_exist">이미 그룹에 존재합니다.</string>
     <string name="sub2_no_code">존재 하지 않는 코드입니다.</string>
     <string name="sub2_add_success">그룹 추가 성공</string>
+    <string name="group_first_camera">찍을 사진의 이름을 정해주세요</string>
+    <string name="group_first_btn1">파일올리기</string>
+    <string name="group_first_btn2">카메라</string>
     <string name="ok">Ok</string>
 </resources>

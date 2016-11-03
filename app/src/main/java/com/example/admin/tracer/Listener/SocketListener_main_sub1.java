@@ -79,7 +79,6 @@ public class SocketListener_main_sub1 {
                             mAdapter.changeOrder(viewHolder.getAdapterPosition() , target.getAdapterPosition());
                             // and notify the adapter that its dataset has changed
                             state = ItemTouchHelper.ACTION_STATE_DRAG;
-
                             mAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
                             return true;
                         }

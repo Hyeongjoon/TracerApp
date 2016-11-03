@@ -3,6 +3,20 @@
     package="com.example.admin.tracer">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <service
+        android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+        android:enabled="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -27,6 +41,7 @@
         <activity android:name=".EmailVerifyActivity"></activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".GroupActivity"></activity>
+        <activity android:name=".GroupInfoActivity"></activity>
     </application>
 
 </manifest>

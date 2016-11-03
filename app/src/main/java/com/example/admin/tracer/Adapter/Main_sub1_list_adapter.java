@@ -181,9 +181,6 @@ public class Main_sub1_list_adapter extends RecyclerView.Adapter <Main_sub1_list
         }
     }
 
-    public List getDataList(){
-        return mList;
-    }
 
     public List getDataOrder(){
         List temp = new ArrayList();

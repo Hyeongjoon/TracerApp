@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Handler;
 
 import com.example.admin.tracer.EmailVerifyActivity;
+import com.example.admin.tracer.Helper.S3SecretKey;
 import com.example.admin.tracer.MainActivity;
 import com.example.admin.tracer.OpeningActivity;
 import com.github.nkzawa.emitter.Emitter;
@@ -34,8 +35,10 @@ public class SocketListener_login {
             try{
                 result = data.getString("result");
                 if(result.equals("true")){
+                    JSONObject data2 = (JSONObject) args[1];
                     pDialog.cancel();
                     Intent intent = new Intent(loginActivity , MainActivity.class);
+                    S3SecretKey.setKey(data2.getString("AccessKey") , data2.getString("Secret"));
                     loginActivity.startActivity(intent);
                     loginActivity.finish();
                     OpeningActivity.OpeningActivity.finish();

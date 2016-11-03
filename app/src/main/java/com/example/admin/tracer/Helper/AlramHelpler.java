@@ -67,4 +67,9 @@ public class AlramHelpler {
                     }
                 return result;
     }
+
+    public static String caculateToUTC(String systemTime){
+
+        return null;
+    }
 }
