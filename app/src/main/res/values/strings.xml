@@ -18,4 +18,10 @@
     <string name="group_first_btn1">파일올리기</string>
     <string name="group_first_btn2">카메라</string>
     <string name="ok">Ok</string>
+    <string name="group_info_download">다운로드</string>
+    <string name="group_info_delete">삭 제</string>
+    <string name="bucket">sendwitchtracer</string>
+    <string name="download_path">/TracerDownload</string>
+    <string name="fail_download">다운로드에 실패했습니다</string>
+    <string name="success_download">다운로드 완료</string>
 </resources>

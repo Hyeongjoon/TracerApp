@@ -174,7 +174,7 @@ public class GroupActivity extends AppCompatActivity {
                     DateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
                     df.setTimeZone(TimeZone.getTimeZone("UTC"));
                     String fileKey = "file/" + gid +"/"+df.format(d) +fileName+".jpg";
-                    PutObjectRequest por = new PutObjectRequest("sendwitchtracer" , fileKey , new File(tempPath));
+                    PutObjectRequest por = new PutObjectRequest( getString(R.string.bucket), fileKey , new File(tempPath));
                     s3Client.putObject(por);
                     fileName = null;
                     JSONObject jsonObject = new JSONObject();
